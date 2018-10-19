@@ -1,0 +1,82 @@
+<button *ngIf="!car" (click)="addNewCar()">Add a car</button>
+<div *ngIf="car">
+  <form (ngSubmit)="onSubmit()" #carForm="ngForm"><!---->
+    <div class="form-field-block">
+      
+      <label for="brand">Brand : </label>
+      <input id="brand" [(ngModel)]="car.brand" 
+             #brand="ngModel" 
+             minlength="4"
+             maxlength="24" 
+             required 
+             placeholder="Brand" 
+             name="brand"
+             forbiddenBrand="^Renault$"
+             />
+      
+      <div class="error-form-field-block" *ngIf="brand.errors && (brand.touched || brand.dirty)">
+        <span [hidden]="!brand.errors.required" class="alert alert-danger">
+          This field has to be filled
+        </span>
+        
+        <span [hidden]="!brand.errors.minlength" class="alert alert-danger">
+          This field value must have 4 characters at least
+        </span>
+        
+        <span [hidden]="!brand.errors.maxlength" class="alert alert-danger">
+          This field value must have 24 characters at most
+        </span>
+       
+        <span [hidden]="!brand.errors.forbiddenBrand" class="alert alert-danger">
+          This brand is forbidden
+        </span>
+      </div>
+
+    </div>
+
+    <div class="form-field-block">
+      <label for="model">Model : </label>
+      <input id="model" [(ngModel)]="car.model" #model="ngModel" placeholder="Model" name="model" required/>
+
+      <div class="error-form-field-block" *ngIf="model.errors && (model.touched || model.dirty)">
+        <span [hidden]="!model.errors.required" class="alert alert-danger">
+          This field has to be filled
+        </span>
+      </div>
+
+    </div>
+    
+    <div class="form-field-block">
+      <label for="model">N° Seats : </label>
+      <input id="model" [(ngModel)]="car.nbSeats" type="number" min="1" max="9" name="nbSeats"/>
+    </div>
+    
+    <div class="form-field-block">
+      <label for="model">Price : </label>
+      <input id="model" [(ngModel)]="car.price" #price="ngModel" required pattern="^\d+(,\d{1,2})?$" step="0.01" name="price"/>
+      
+      <div class="error-form-field-block" *ngIf="price.errors && (price.touched || price.dirty)">
+        <span [hidden]="!price.errors.required" class="alert alert-danger">
+          This field has to be filled
+        </span>
+
+        <span [hidden]="!price.errors.pattern" class="alert alert-danger">
+          This field's format is incorrect
+        </span>
+      </div>
+
+    </div>
+
+    <div class="form-field-block">
+      <label for="model">Horsepower : </label>
+      <input id="model" [(ngModel)]="car.horsePower" type="number" min="1" name="horsePower"/>
+    </div>
+    
+    <div class="form-field-block">
+      <label for="model">Weight : </label>
+      <input id="model" [(ngModel)]="car.weight" type="number" min="1" name="weight"/>
+    </div>
+
+    <button type="submit" [disabled]="!carForm.form.valid">Create Car</button>
+  </form>
+</div>
