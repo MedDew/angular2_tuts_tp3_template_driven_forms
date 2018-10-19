@@ -5,12 +5,12 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { APPCONFIG } from './app.config';
 import { CarsModule } from './cars/cars.module';
-import { ForbiddenBrandValidatorDirective } from './cars/shared/forbidden-brand-validator.directive';
+//import { ForbiddenBrandValidatorDirective } from './cars/shared/forbidden-brand-validator.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ForbiddenBrandValidatorDirective
+    //ForbiddenBrandValidatorDirective
   ],
   imports: [
     BrowserModule,
